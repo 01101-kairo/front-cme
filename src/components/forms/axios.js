@@ -25,7 +25,7 @@ const Calculo = async () => {
     .map(key => `${key}=${encodeURIComponent(dados[key])}`)
     .join('&')
 
-    const url = `http://localhost:8080/produto/?${queryString}`
+    const url = `https://back-cme.onrender.com/produto/?${queryString}`
     const response = await axios.get(url)
     const { autoclave, lavadora } = response.data
 
