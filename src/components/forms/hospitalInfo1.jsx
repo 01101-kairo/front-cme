@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 
 const PrimeirosDadosDoHospital = () => {
   const navigate = useNavigate()
-  const json =  JSON.parse(localStorage.getItem('formulario1'))
+  const json =  JSON.parse(localStorage.getItem('formulario'))
 
   const initialValues = {
     possui: json?.possui ?? false,
@@ -31,7 +31,7 @@ const PrimeirosDadosDoHospital = () => {
   })
 
   const handleSaveToLocalStorage = (values) => {
-    const existingValues = JSON.parse(localStorage.getItem('formulario1')) || {}
+    const existingValues = JSON.parse(localStorage.getItem('formulario')) || {}
     const newValues = {
       possui: document.querySelector('input[name="possui"]').checked,
       ampliacao: document.querySelector('input[name="ampliacao"]').checked,
@@ -42,7 +42,7 @@ const PrimeirosDadosDoHospital = () => {
       diasDaSemana: values.diasDaSemana
     }
     const updatedValues = { ...existingValues, ...newValues }
-    localStorage.setItem('formulario1', JSON.stringify(updatedValues))
+    localStorage.setItem('formulario', JSON.stringify(updatedValues))
   }
 
   const handleSubmit = (values, { setSubmitting }) => {

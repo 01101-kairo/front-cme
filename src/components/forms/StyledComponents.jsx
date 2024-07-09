@@ -1,13 +1,13 @@
 import styled from "styled-components"
-
-const Container = styled.div`
+ 
+export const Container = styled.div`
   padding: 60px 0;
   background: linear-gradient(280deg, #466385 0%, #011329 100%);
   display: flex;
   justify-content: center;
 `
 
-const Content = styled.div`
+export const Content = styled.div`
   width: 80%;
   max-width: 600px;
   display: flex;
@@ -24,15 +24,15 @@ const Content = styled.div`
     background: none;
     box-shadow: none;
   }
-`
-const Row = styled.div`
+` 
+export const Row = styled.div`
   display: flex;
   gap: 20px;
   @media (max-width: 550px) {
     display: block;
   }
-`
-const ContentTabela = styled.div`
+` 
+export const ContentTabela = styled.div`
   width: 80%;
   max-width: 600px;
   box-shadow: 0 1px 2px;
@@ -54,12 +54,12 @@ const ContentTabela = styled.div`
     background: none;
     box-shadow: none;
   }
-`
-const Footer = styled.div`
+` 
+export const Footer = styled.div`
   text-align: end;
 `
-
-const Button = styled.button`
+ 
+export const Button = styled.button`
   padding: 10px;
   margin:10px;
   font-size: 20px;
@@ -76,4 +76,3 @@ const Button = styled.button`
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
   }
 `
-export {Container, Content, ContentTabela, Row, Footer, Button }

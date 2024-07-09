@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const Calculo = async () => {
 
-  const formulario1Values = JSON.parse(localStorage.getItem('formulario1'))
+  const formulario1Values = JSON.parse(localStorage.getItem('formulario'))
   if (!formulario1Values) {
     console.error('No values found in local storage')
     return Promise.reject(new Error('No values found in local storage'))
@@ -42,7 +42,7 @@ const Calculo = async () => {
 
 
 const Macaco = async () => {
-  const formulario1Values = JSON.parse(localStorage.getItem('formulario1'))
+  const formulario1Values = JSON.parse(localStorage.getItem('formulario'))
   if (!formulario1Values) {
     console.error('No values found in local storage')
     return Promise.reject(new Error('No values found in local storage'))

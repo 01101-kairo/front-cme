@@ -5,6 +5,10 @@ const Tabela = () => {
   const location = useLocation()
   const { autoclave, lavadora } = location.state || { autoclave: [], lavadora: [] }
 
+  const existingValues = JSON.parse(localStorage.getItem('formulario')) || {}
+  const updatedValues = { ...existingValues, efetuado: true }
+  localStorage.setItem('formulario', JSON.stringify(updatedValues))
+
   return (
     <Container>
       <ContentTabela>
