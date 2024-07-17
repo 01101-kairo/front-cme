@@ -69,10 +69,8 @@ const Lead = () => {
     handleSaveToLocalStorage()
     const formularioData = JSON.parse(localStorage.getItem('formulario'))
     const efetuado = formularioData.efetuado === true
-    const cnpjLocalStorage = formularioData.cnpj
-    const cnpjValido = values.cnpj === cnpjLocalStorage
 
-    if (efetuado && cnpjValido) {
+    if (efetuado) {
       setShowMessage(true)
       setSubmitting(false)
       return

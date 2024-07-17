@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, Formik } from 'formik'
 import { Input } from './../input'
 import { DiasDaSemana } from './../diasDaSemana'
@@ -30,6 +30,8 @@ const PrimeirosDadosDoHospital = () => {
     diasDaSemana: Yup.array().min(1, 'Selecione pelo menos um dia da semana').required('Campo obrigatório')
   })
 
+  const [showMessage, setShowMessage] = useState(false)
+
   const handleSaveToLocalStorage = (values) => {
     const existingValues = JSON.parse(localStorage.getItem('formulario')) || {}
     const newValues = {
@@ -51,7 +53,16 @@ const PrimeirosDadosDoHospital = () => {
     values.intervaloCme = parseInt(values.intervaloCme)
 
     handleSaveToLocalStorage(values)
-    setSubmitting(false)
+
+    const formularioData = JSON.parse(localStorage.getItem('formulario'))
+    const efetuado = formularioData.efetuado === true
+
+    if (efetuado ) {
+      setShowMessage(true)
+      setSubmitting(false)
+      return
+    }
+
     navigate('/hospital2')
   }
 
@@ -65,6 +76,11 @@ const PrimeirosDadosDoHospital = () => {
         >
           {({ values, isSubmitting }) => (
             <Form style={{ width: '90%' }}>
+              {showMessage && (
+                <p style={{ color: 'red' }}>
+                  Você não pode prosseguir, é permitida apenas uma única utilização por hospital.
+                </p>
+              )}
               <Row>
                 <Input
                   type="checkbox"
@@ -123,9 +139,9 @@ const PrimeirosDadosDoHospital = () => {
               </Row>
               <Row>
                 <Input 
-                  name="intervaloCme" 
-                  type="number" 
-                  label="Qual o intervalo de pico de funcionamento da CME?" 
+                  name="intervaloCme"
+                  type="number"
+                  label="Qual o intervalo de pico de funcionamento da CME?"
                   required
                 />
               </Row>

@@ -1,4 +1,4 @@
-import React, { useTransition } from 'react'
+import React, { useTransition, useState } from 'react'
 import { Form, Formik } from "formik"
 import { Input } from "./../input"
 import { Calculo, Macaco } from "./../forms/axios"
@@ -31,6 +31,7 @@ const segundosDadosDoHospital = () => {
     totalDeLavadorasTermo: Yup.number().required("Campo obrigatório").min(1, "Deve ser maior que 0"),
   })
 
+  const [showMessage, setShowMessage] = useState(false)
 
   const handleSaveToLocalStorage = (values) => {
     const existingValues = JSON.parse(localStorage.getItem('formulario')) || {}
@@ -46,11 +47,19 @@ const segundosDadosDoHospital = () => {
       await Macaco()
       const calculoResult = await Calculo()
       const { autoclave, lavadora } = calculoResult
+
+      const formularioData = JSON.parse(localStorage.getItem('formulario'))
+      const efetuado = formularioData.efetuado === true
+
+      if (efetuado ) {
+        setShowMessage(true)
+        setSubmitting(false)
+        return
+      }
+
       startTransition(() => {
         navigate('/tabela', { state: { autoclave, lavadora } })
       })
-
-      setSubmitting(false)
 
     } catch (error) {
       console.error('Error during calculation:', error)
@@ -76,6 +85,11 @@ const segundosDadosDoHospital = () => {
                 <p style={{height: "50vh" }}>Carregando...</p>
               ) : (
                   <Form style={{ width: "90%" }}>
+                    {showMessage && (
+                      <p style={{ color: 'red' }}>
+                        Você não pode prosseguir, é permitida apenas uma única utilização por hospital.
+                      </p>
+                    )}
                     <Row>
                       <Input name="leitoUti" label="leitos de UTI" type="number" required />
                       <Input name="leitoInternacao" label="leito de internação" type="number" required />
